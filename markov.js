@@ -19,7 +19,6 @@ class MarkovMachine {
   makeChains() {
     let x = {}
     for (let i = 0; i < this.words.length; i++) {
-      // console.log(this.words[i])
       
       if (x[this.words[i]] === undefined) {
         if (this.words[i + 1] !== undefined) {
@@ -39,20 +38,41 @@ class MarkovMachine {
       }
     }
     console.log(x)
+    return x
   }
-
 
   /** return random text from chains */
 
   makeText(numWords = 100) {
-    // TODO
+
+    let pWords = this.makeChains()
+    let words = []
+    let w
+
+    let r = Object.keys(pWords).length -1
+    let x = Math.floor(Math.random() * Math.floor(r))
+    let y = Object.keys(pWords)[x]
+
+    for (let i = 0; words.length <= numWords - 1; i++) {
+      if (i === 0) {
+        r = pWords[y].length
+        x = Math.floor(Math.random() * Math.floor(r))
+        w = pWords[y][x]
+        words.push(w)
+      }
+      r = pWords[w].length
+      x = Math.floor(Math.random() * Math.floor(r))
+          
+      if (pWords[w][x] !== null) {
+        w = pWords[w][x]
+        words.push(w)
+      }
+      else {
+        break
+      }  
+    }
+
+    return words.join(" ")
+
   }
-}
-
-
-x = {
-  "the": ["cat", "hat"], 
-"cat": ["in"], 
-"in": ["the"], 
-"hat": [null]
 }
