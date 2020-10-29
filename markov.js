@@ -37,7 +37,6 @@ class MarkovMachine {
         }
       }
     }
-    console.log(x)
     return x
   }
 
@@ -76,3 +75,5 @@ class MarkovMachine {
 
   }
 }
+
+module.exports = {MarkovMachine};
